@@ -1,4 +1,4 @@
-﻿La génération a démarré 15/01/2017 23:03:58.
+﻿La génération a démarré 16/01/2017 10:29:41.
      1>Projet "D:\User\Dams\Documents\GitHub\sudokuSolver\test\SudokuSolver_test\SudokuSolver_test.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\input\FileInput.cpp
@@ -13,4 +13,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:06.93
+Temps écoulé 00:00:08.84
