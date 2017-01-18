@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SudokuSolver", "SudokuSolver.vcxproj", "{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "GoogleTest\GoogleTest.vcxproj", "{8474092D-3FA1-4905-B87B-D5A93B17228D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SudokuSolver_test", "test\SudokuSolver_test\SudokuSolver_test.vcxproj", "{ED714224-2019-4063-B3BA-EC755C7FF76A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8474092D-3FA1-4905-B87B-D5A93B17228D} = {8474092D-3FA1-4905-B87B-D5A93B17228D}
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED} = {9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Debug|x64.ActiveCfg = Debug|x64
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Debug|x64.Build.0 = Debug|x64
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Debug|x86.ActiveCfg = Debug|Win32
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Debug|x86.Build.0 = Debug|Win32
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Release|x64.ActiveCfg = Release|x64
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Release|x64.Build.0 = Release|x64
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Release|x86.ActiveCfg = Release|Win32
+		{9A71309D-CFDC-4018-B5E9-9CCBB5C54EED}.Release|x86.Build.0 = Release|Win32
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Debug|x64.ActiveCfg = Debug|x64
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Debug|x64.Build.0 = Debug|x64
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Debug|x86.ActiveCfg = Debug|Win32
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Debug|x86.Build.0 = Debug|Win32
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Release|x64.ActiveCfg = Release|x64
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Release|x64.Build.0 = Release|x64
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Release|x86.ActiveCfg = Release|Win32
+		{8474092D-3FA1-4905-B87B-D5A93B17228D}.Release|x86.Build.0 = Release|Win32
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Debug|x64.ActiveCfg = Debug|x64
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Debug|x64.Build.0 = Debug|x64
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Debug|x86.ActiveCfg = Debug|Win32
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Debug|x86.Build.0 = Debug|Win32
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Release|x64.ActiveCfg = Release|x64
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Release|x64.Build.0 = Release|x64
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Release|x86.ActiveCfg = Release|Win32
+		{ED714224-2019-4063-B3BA-EC755C7FF76A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
