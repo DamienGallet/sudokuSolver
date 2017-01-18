@@ -21,9 +21,9 @@ Grid::Grid(vector<vector<int>> initialGrid) :
 	// We translate that in an array of cells, and each cell has a reference to the grid, its row and its col
 
 	bool valid = true;
-	for (int row = 0; row < initialGrid.size(); row++) {
+	for (unsigned int row = 0; row < initialGrid.size(); row++) {
 		Area * currentRow = GetRow(row);
-		for (int col = 0; col < initialGrid[row].size(); col++) {
+		for (unsigned int col = 0; col < initialGrid[row].size(); col++) {
 			Area * currentCol = GetCol(col);
 			Area * currentBlock = GetBlock(row, col);
 			Cell * newCell = new Cell(initialGrid[row][col], this, currentRow, currentCol, currentBlock,col,row);
@@ -97,14 +97,14 @@ Area * Grid::GetBlock(int rowNb, int colNb) {
 
 
 void Grid::UpdateCellsList(Cell * lastModified) {
-	for (int i = 0; i < toFill.size(); i++) {
+	for (unsigned int i = 0; i < toFill.size(); i++) {
 		toFill[i]->UpdateScore();
 	}
 	UpdateCellsList();
 }
 
 void Grid::UpdateCellsList() {
-	for (int i = 0; i < toFill.size(); i++) {
+	for (unsigned int i = 0; i < toFill.size(); i++) {
 		toFill[i]->UpdateScore();
 	}
 	sort(toFill.begin(), toFill.end(), CellComp);
@@ -132,7 +132,11 @@ void Grid::ReleaseCell(Cell * cell) {
 bool Grid::ExploreNewNode(Cell * cell) {
 	vector<int> availableNumbers = cell->CheckAvailable();
 	cout << availableNumbers.size() << endl;
-	for (	int currentNumberIndex = 0; 
+	cout << toFill.size() << endl;
+	if (availableNumbers.size() == 0) {
+		return true;
+	}
+	for (	unsigned int currentNumberIndex = 0;
 			currentNumberIndex < availableNumbers.size();
 			currentNumberIndex++) {
 		cell->SetValue(availableNumbers[currentNumberIndex]);
@@ -141,7 +145,9 @@ bool Grid::ExploreNewNode(Cell * cell) {
 			return true;
 		}
 		if (next->IsStuck()) {
-			ReleaseCell(cell);
+			toFill.push_back(next);
+			cout << "Rollback stuck" << endl;
+			cout << toFill.size() << endl;
 			return false;
 		}
 		else {
@@ -149,8 +155,11 @@ bool Grid::ExploreNewNode(Cell * cell) {
 				return true;
 			}
 		}
+		ReleaseCell(next);
 	}
-	return true;
+	cout << "Rollback default" << endl;
+	cout << toFill.size() << endl;
+	return false;
 }
 
 bool Grid::Play() {
@@ -188,9 +197,9 @@ Grid::~Grid() {
 }
 
 void Grid::Print() {
-	for (int row = 0; row < grid.size(); row++) {
+	for (unsigned int row = 0; row < grid.size(); row++) {
 		cout << "--";
-		for (int col = 0; col < grid[row].size(); col++) {
+		for (unsigned int col = 0; col < grid[row].size(); col++) {
 			cout << grid[row][col]->GetValue() << " ";
 		}
 		cout << endl;

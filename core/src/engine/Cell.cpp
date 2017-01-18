@@ -87,6 +87,7 @@ int Cell::UpdateScore() {
 }
 
 bool Cell::IsStuck() {
+	UpdateScore();
 	if (score == 0) {
 		return true;
 	}
