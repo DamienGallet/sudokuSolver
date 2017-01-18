@@ -97,9 +97,7 @@ Area * Grid::GetBlock(int rowNb, int colNb) {
 
 
 void Grid::UpdateCellsList(Cell * lastModified) {
-	for (unsigned int i = 0; i < toFill.size(); i++) {
-		toFill[i]->UpdateScore();
-	}
+	lastModified->UpdateScore();
 	UpdateCellsList();
 }
 
@@ -110,29 +108,29 @@ void Grid::UpdateCellsList() {
 	sort(toFill.begin(), toFill.end(), CellComp);
 }
 
-Cell * Grid::GetNextCell() {
+Cell * Grid::SeeNextCell() {
 	UpdateCellsList();
 	if (toFill.size() == 0) {
 		return nullptr;
 	}
 	/*if (toFill[0]->GetScore() == gameConst::MAX_SCORE) {
-		return nullptr;
+	return nullptr;
 	}*/
 	Cell * nextCell = toFill[0];
-	toFill.erase(toFill.begin());
 	return nextCell;
 }
 
+void Grid::CatchNextCell() {
+	toFill.erase(toFill.begin());
+}
+
 void Grid::ReleaseCell(Cell * cell) {
-	cell->Release();
 	toFill.push_back(cell);
 	UpdateCellsList(cell);
 }
 
 bool Grid::ExploreNewNode(Cell * cell) {
 	vector<int> availableNumbers = cell->CheckAvailable();
-	cout << availableNumbers.size() << endl;
-	cout << toFill.size() << endl;
 	if (availableNumbers.size() == 0) {
 		return true;
 	}
@@ -140,25 +138,24 @@ bool Grid::ExploreNewNode(Cell * cell) {
 			currentNumberIndex < availableNumbers.size();
 			currentNumberIndex++) {
 		cell->SetValue(availableNumbers[currentNumberIndex]);
-		Cell * next = GetNextCell();
+		Cell * next = SeeNextCell();
 		if (next == nullptr) {
 			return true;
 		}
 		if (next->IsStuck()) {
-			toFill.push_back(next);
-			cout << "Rollback stuck" << endl;
-			cout << toFill.size() << endl;
+			cell->Release();
 			return false;
 		}
 		else {
+			CatchNextCell();
 			if (ExploreNewNode(next)) {
 				return true;
 			}
+			ReleaseCell(next);
 		}
-		ReleaseCell(next);
+		cell->Release();
+		
 	}
-	cout << "Rollback default" << endl;
-	cout << toFill.size() << endl;
 	return false;
 }
 
@@ -166,7 +163,8 @@ bool Grid::Play() {
 
 	UpdateCellsList();
 	if (toFill.size() > 0) {
-		Cell * firstCell = GetNextCell();
+		Cell * firstCell = SeeNextCell();
+		CatchNextCell();
 		bool res = ExploreNewNode(firstCell);
 		Print();
 		return res;

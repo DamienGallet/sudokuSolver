@@ -58,8 +58,12 @@ void Cell::Release() {
 	currentCol->Release(value);
 	currentRow->Release(value);
 
+	UpdateScore();
+
 	value = 0;
 	currentIndex = -1;
+
+	
 }
 
 void Cell::SetValue(int valueP) {

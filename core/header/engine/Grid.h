@@ -30,7 +30,8 @@ public :
 
 	bool CheckGrid();
 
-	Cell * GetNextCell();
+	Cell * SeeNextCell();
+	void CatchNextCell();
 	void ReleaseCell(Cell * cell);
 	bool ExploreNewNode(Cell * cell);
 	void UpdateCellsList(Cell * lastModified);
