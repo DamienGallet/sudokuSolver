@@ -161,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Controller.cpp" />
+    <ClCompile Include="..\src\engine\Area.cpp" />
+    <ClCompile Include="..\src\engine\Grid.cpp" />
     <ClCompile Include="..\src\input\FileInput.cpp" />
   </ItemGroup>
   <ItemGroup>

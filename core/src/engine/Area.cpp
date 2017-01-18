@@ -1,5 +1,6 @@
 #include <set>
 #include <bitset>
+#include <iostream>
 
 #include "../../header/Common.h"
 #include "../../header/engine/Area.h"
@@ -7,7 +8,6 @@
 using namespace std;
 
 Area::Area(classUtilities::AreaType areaTypeP) {
-	elements = set<Cell*>();
 	areaType = areaTypeP;
 	state = classUtilities::AreaState::UNCHECKED;
 }
@@ -15,8 +15,8 @@ Area::Area(classUtilities::AreaType areaTypeP) {
 
 
 bool Area::AddCell(Cell * newCell) {
-	
-	if (elements.size() <= gameConst::SIZE) {
+
+	if (elements.size() > gameConst::SIZE) {
 		return false;
 	}
 
@@ -27,25 +27,37 @@ bool Area::AddCell(Cell * newCell) {
 
 bool Area::Check() {
 	if (state != classUtilities::AreaState::CHECKED) {
-		bitset<size_t(gameConst::SIZE)> currentOccupation(0);
+		bitset<size_t(gameConst::SIZE)> currentOccupation(gameConst::AREA_EMPTY);
 		for (set<Cell*>::iterator it = elements.begin(); it != elements.end(); it++) {
 			int currentValue = (*it)->GetValue();
-			if (currentOccupation[currentValue-1] != 0)
+			if (currentValue == 0) {
+				continue;
+			}
+			if (currentOccupation[currentValue-1] == gameConst::NUMB_USED)
 				return false;
 			else
-				currentOccupation[currentValue-1] = 1;
+				currentOccupation[currentValue-1] = gameConst::NUMB_USED;
 		}
-		occupation = currentOccupation;
+
+		occupation = currentOccupation.to_ulong();
 		state = classUtilities::AreaState::CHECKED;
 	}
 
 	return true;
 }
 
-void Area::Update(int newNb) {
-	occupation[newNb - 1] = 1;
+void Area::Release(int numberToRelease) {
+	bitset<gameConst::SIZE> occupationBitSet(occupation);
+	occupationBitSet[numberToRelease - 1] = gameConst::NUMB_FREE;
+	occupation = occupationBitSet.to_ulong();
 }
 
-bitset<size_t(gameConst::SIZE)> Area::GetOccupation() {
+void Area::Update(int newNb) {
+	bitset<gameConst::SIZE> occupationBitSet(occupation);
+	occupationBitSet[newNb - 1] = gameConst::NUMB_USED;
+	occupation = occupationBitSet.to_ulong();
+}
+
+uint64_t Area::GetOccupation() {
 	return occupation;
 }

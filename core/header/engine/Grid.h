@@ -1,6 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <queue>
+#include "Cell.h"
+#include "Area.h"
+#include "Grid.h"
 
 using namespace std;
 
@@ -17,8 +21,8 @@ public :
 
 	virtual ~Grid();
 
-	bool UpdateCell(int row, int col, int newNb);
-	bool UpdateCell(Cell * cell, int newNb);
+	bool UpdateCell(int row, int col, int newNb) {};
+	bool UpdateCell(Cell * cell, int newNb) {};
 
 	Area * GetRow(int rowNb);
 	Area * GetCol(int colNb);
@@ -26,7 +30,18 @@ public :
 
 	bool CheckGrid();
 
+	Cell * GetNextCell();
+	void ReleaseCell(Cell * cell);
+	bool ExploreNewNode(Cell * cell);
+	void UpdateCellsList(Cell * lastModified);
+	void UpdateCellsList();
+	void Print();
+
+	bool Play();
+
 protected :
+	vector<Cell *> toFill;
+	vector<Cell *> initiallyFilled;
 	vector<vector<Cell *>> grid;
 	vector<Area *> rows;
 	vector<Area *> cols;
